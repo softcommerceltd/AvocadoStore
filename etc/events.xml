@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_shipment_save_after">
+        <observer name="softcommerce_avocado_shipment_submit_processor" instance="SoftCommerce\Avocado\Observer\SalesOrderShipmentSaveAfter"/>
+    </event>
+</config>

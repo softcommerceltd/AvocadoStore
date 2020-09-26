@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="SoftCommerce_Avocado::core"
+             title="Avocado Store"
+             translate="title"
+             module="SoftCommerce_Avocado"
+             sortOrder="10"
+             parent="SoftCommerce_Core::core"
+             resource="SoftCommerce_Avocado::core"/>
+        <add id="SoftCommerce_Avocado::configuration"
+             title="Configuration"
+             translate="title"
+             module="SoftCommerce_Avocado"
+             sortOrder="10"
+             parent="SoftCommerce_Avocado::core"
+             action="adminhtml/system_config/edit/section/softcommerce_avocado/"
+             resource="SoftCommerce_Avocado::configuration"/>
+        <add id="SoftCommerce_Avocado::order_list"
+             title="Order Listing"
+             translate="title"
+             module="SoftCommerce_Avocado"
+             sortOrder="20"
+             parent="SoftCommerce_Avocado::core"
+             action="softcommerce_avocado/order/"
+             resource="SoftCommerce_Avocado::order_list"/>
+        <add id="SoftCommerce_Avocado::shipment_list"
+             title="Shipment Listing"
+             translate="title"
+             module="SoftCommerce_Avocado"
+             sortOrder="30"
+             parent="SoftCommerce_Avocado::core"
+             action="softcommerce_avocado/shipment/"
+             resource="SoftCommerce_Avocado::shipment_list"/>
+    </menu>
+</config>

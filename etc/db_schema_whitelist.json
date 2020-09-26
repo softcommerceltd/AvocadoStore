@@ -1,0 +1,47 @@
+{
+    "softcommerce_avocado_order": {
+        "column": {
+            "entity_id": true,
+            "avocado_order_id": true,
+            "status": true,
+            "order_id": true,
+            "increment_id": true,
+            "quote_id": true,
+            "message": true,
+            "order_entry": true,
+            "billing_entry": true,
+            "shipping_entry": true,
+            "item_entry": true,
+            "created_at": true,
+            "updated_at": true,
+            "collected_at": true,
+            "processed_at": true
+        },
+        "index": {
+            "SOFTCOMMERCE_AVOCADO_ORDER_INCREMENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "softcommerce_avocado_shipment": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "status": true,
+            "increment_id": true,
+            "track_no": true,
+            "service_provider": true,
+            "message": true,
+            "created_at": true,
+            "processed_at": true
+        },
+        "index": {
+            "SOFTCOMMERCE_AVOCADO_SHIPMENT_INCREMENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_9E284FBD3B0F5E39B4B86C255587218D": true
+        }
+    }
+}

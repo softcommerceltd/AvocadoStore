@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="softcommerce_avocado_order" resource="default" engine="innodb">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="avocado_order_id" nullable="false" length="32"
+                comment="Avocado Order ID"/>
+        <column xsi:type="varchar" name="status" nullable="true" length="16"
+                comment="Status"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="true" identity="false"
+                comment="Order ID"/>
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="32"
+                comment="Increment ID"/>
+        <column xsi:type="int" name="quote_id" unsigned="false" nullable="true" identity="false"
+                comment="Quote ID"/>
+        <column xsi:type="text" name="message" nullable="true"
+                comment="Message"/>
+        <column xsi:type="longtext" name="order_entry" nullable="true"
+                comment="Order Entry"/>
+        <column xsi:type="longtext" name="billing_entry" nullable="true"
+                comment="Billing Entry"/>
+        <column xsi:type="longtext" name="shipping_entry" nullable="true"
+                comment="Shipping Entry"/>
+        <column xsi:type="longtext" name="item_entry" nullable="true"
+                comment="Item Entry"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="true"
+                comment="Updated At"/>
+        <column xsi:type="timestamp" name="collected_at" on_update="false" nullable="true"
+                comment="Collected At"/>
+        <column xsi:type="timestamp" name="processed_at" on_update="false" nullable="true"
+                comment="Processed At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+            <column name="avocado_order_id"/>
+        </constraint>
+        <index referenceId="SOFTCOMMERCE_AVOCADO_ORDER_INCREMENT_ID" indexType="btree">
+            <column name="increment_id"/>
+        </index>
+    </table>
+    <table name="softcommerce_avocado_shipment" resource="default" engine="innodb">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="false"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false"
+                comment="Parent ID"/>
+        <column xsi:type="varchar" name="status" nullable="true" length="16"
+                comment="Status"/>
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="32"
+                comment="Increment ID"/>
+        <column xsi:type="text" name="track_no" nullable="true"
+                comment="Truck Number"/>
+        <column xsi:type="varchar" name="service_provider" nullable="true" length="32"
+                comment="Service Provider"/>
+        <column xsi:type="text" name="message" nullable="true"
+                comment="Message"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="processed_at" on_update="false" nullable="true"
+                comment="Processed At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_9E284FBD3B0F5E39B4B86C255587218D" table="softcommerce_avocado_shipment" column="parent_id"
+                    referenceTable="softcommerce_avocado_order" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="SOFTCOMMERCE_AVOCADO_SHIPMENT_INCREMENT_ID" indexType="btree">
+            <column name="increment_id"/>
+        </index>
+    </table>
+</schema>

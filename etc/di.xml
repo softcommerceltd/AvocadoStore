@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- order ::: interface | repository | management -->
+    <preference for="SoftCommerce\Avocado\Api\Data\OrderInterface" type="SoftCommerce\Avocado\Model\Order"/>
+    <preference for="SoftCommerce\Avocado\Api\OrderRepositoryInterface" type="SoftCommerce\Avocado\Model\OrderRepository"/>
+    <preference for="SoftCommerce\Avocado\Api\Data\OrderSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="SoftCommerce\Avocado\Api\OrderCollectManagementInterface" type="SoftCommerce\Avocado\Model\OrderCollectManagement"/>
+    <preference for="SoftCommerce\Avocado\Api\OrderCreateManagementInterface" type="SoftCommerce\Avocado\Model\OrderCreateManagement"/>
+    <preference for="SoftCommerce\Avocado\Model\Order\FileProcessorInterface" type="SoftCommerce\Avocado\Model\Order\FileProcessor"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="softcommerce_avocado_order_listing_data_source" xsi:type="string">SoftCommerce\Avocado\Ui\DataProvider\OrderListingSearchResult</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="SoftCommerce\Avocado\Ui\DataProvider\OrderListingSearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">softcommerce_avocado_order</argument>
+            <argument name="resourceModel" xsi:type="string">SoftCommerce\Avocado\Model\ResourceModel\Order</argument>
+            <argument name="identifierName" xsi:type="string">entity_id</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="SoftCommerce\Avocado\Api\Data\OrderInterface" xsi:type="string">SoftCommerce\Avocado\Api\OrderRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="SoftCommerce\Avocado\Api\Data\OrderInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">softcommerce_avocado_order</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- shipment ::: interface | repository | management -->
+    <preference for="SoftCommerce\Avocado\Api\Data\ShipmentInterface" type="SoftCommerce\Avocado\Model\Shipment"/>
+    <preference for="SoftCommerce\Avocado\Api\ShipmentRepositoryInterface" type="SoftCommerce\Avocado\Model\ShipmentRepository"/>
+    <preference for="SoftCommerce\Avocado\Api\Data\ShipmentSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="SoftCommerce\Avocado\Api\ShipmentCollectManagementInterface" type="SoftCommerce\Avocado\Model\ShipmentCollectManagement"/>
+    <preference for="SoftCommerce\Avocado\Api\ShipmentCreateManagementInterface" type="SoftCommerce\Avocado\Model\ShipmentCreateManagement"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="softcommerce_avocado_shipment_listing_data_source" xsi:type="string">SoftCommerce\Avocado\Ui\DataProvider\ShipmentListingSearchResult</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="SoftCommerce\Avocado\Ui\DataProvider\ShipmentListingSearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">softcommerce_avocado_shipment</argument>
+            <argument name="resourceModel" xsi:type="string">SoftCommerce\Avocado\Model\ResourceModel\Shipment</argument>
+            <argument name="identifierName" xsi:type="string">entity_id</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="SoftCommerce\Avocado\Api\Data\ShipmentInterface" xsi:type="string">SoftCommerce\Avocado\Api\ShipmentRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="SoftCommerce\Avocado\Api\Data\ShipmentInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">softcommerce_avocado_shipment</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- CLI -->
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="create_order" xsi:type="object">SoftCommerce\Avocado\Console\Command\CreateOrder</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Logger -->
+    <virtualType name="SoftCommerceAvocadoVirtualLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">SoftCommerce\Avocado\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="SoftCommerce\Avocado\Logger\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">SoftCommerceAvocadoVirtualLogger</argument>
+        </arguments>
+    </type>
+    <!-- plugins -->
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="avocado_order_id_provider_plugin" type="SoftCommerce\Avocado\Plugin\Sales\Order\GetAvocadoOrderIdForOrderPlugin"/>
+    </type>
+    <!-- custom metadata to sales order grid -->
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid">
+        <arguments>
+            <argument name="joins" xsi:type="array">
+                <item name="softcommerce_avocado_order" xsi:type="array">
+                    <item name="table" xsi:type="string">softcommerce_avocado_order</item>
+                    <item name="origin_column" xsi:type="string">entity_id</item>
+                    <item name="target_column" xsi:type="string">order_id</item>
+                </item>
+            </argument>
+            <argument name="columns" xsi:type="array">
+                <item name="avocado_order_id" xsi:type="string">softcommerce_avocado_order.avocado_order_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <plugin name="sales_order_grid_avocado_order_id_provider" type="SoftCommerce\Avocado\Plugin\Sales\Order\SalesOrderGridAvocadoOrderIdProviderPlugin" sortOrder="1"/>
+    </type>
+</config>
