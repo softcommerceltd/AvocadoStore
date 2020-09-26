@@ -1,4 +1,7 @@
 # AvocadoStore_M24
-Magento :: AvocadoStore :: Integration
+Magento :: AvocadoStore :: Synchronisation
 
-Magento plugin that integrates AvocadoStore order and shipment synchronisation. 
+A plugin that integrates and synchronises data between Magento and AvocadoStore https://www.avocadostore.de/ 
+Available integrations:
+* -- order import from AvocadoStore into Magento;
+* -- shipment export form Magento to Avocadostore;
