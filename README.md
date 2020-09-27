@@ -12,6 +12,44 @@ A plugin that integrates and synchronises data between Magento2 and AvocadoStore
 * [AvocadoStore account](https://www.avocadostore.de/)
 * PHP 7.4.0 or later
 
+## Installation
+
+### Install via FTP
+* Download compressed file and unzip it.
+* Login to your magento server and move to magento's app/code directory
+`cd app/code && mkdir SoftCommerce && cd SoftCommerce && mkdir Avocado` to create new directory app/code/SoftCommerce/Avocado
+* Upload contents to app/code/SoftCommerce/Avocado directory.
+* Move back to your magento root directory and execute the following commands
+
+### Install via composer
+
+Run the following command from Magento root directory:
+
+```
+composer config repositories.softcommerce-avocado vcs https://github.com/theexten/AvocadoStore_M24.git
+composer require softcommerce/avocado
+```
+If you receive an error regarding php incompatibility, but you are sure your php version is compatible, then use --ignore-platform-reqs
+```
+composer require softcommerce/avocado --ignore-platform-reqs
+```
+
+### Post Installation
+
+In production mode:
+```
+php bin/magento maintenance:enable
+php bin/magento setup:upgrade
+php bin/magento deploy:mode:set production
+php bin/magento maintenance:disable
+```
+
+In development mode:
+```
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+```
+
 ## License
 Each source file included in this directory is licensed under OSL 3.0.
 
@@ -30,17 +68,6 @@ Please see `LICENSE.txt` for full details of the OSL 3.0 license.
     </a>
 </p>
 
-## 2. Installation
 
-### Install via composer (recommend)
-
-Run the following command in Magento 2 root folder:
-
-```
-composer require softcommerce/avocado
-php bin/magento setup:upgrade
-php bin/magento setup:di:compile
-php bin/magento setup:static-content:deploy
-```
 
 
