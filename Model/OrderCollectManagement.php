@@ -15,7 +15,7 @@ use SoftCommerce\Avocado\Api\Data\OrderInterface;
 use SoftCommerce\Avocado\Api\OrderCollectManagementInterface;
 use SoftCommerce\Avocado\Helper\Data;
 use SoftCommerce\Avocado\Logger\Logger;
-use SoftCommerce\Core\Model\Source\Status;
+use SoftCommerce\Avocado\Model\Source\Status;
 
 /**
  * Class OrderCollectManagement

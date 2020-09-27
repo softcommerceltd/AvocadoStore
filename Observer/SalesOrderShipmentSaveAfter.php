@@ -10,7 +10,7 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Sales\Model\Order\Shipment;
 use SoftCommerce\Avocado\Api\ShipmentCollectManagementInterface;
 use SoftCommerce\Avocado\Logger\Logger;
-use SoftCommerce\Core\Model\Source\Status;
+use SoftCommerce\Avocado\Model\Source\Status;
 
 /**
  * Class SalesOrderShipmentSaveAfter

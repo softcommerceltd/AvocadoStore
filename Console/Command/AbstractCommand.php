@@ -9,7 +9,7 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\State;
 use Magento\Framework\Phrase;
 use SoftCommerce\Avocado\Logger\Logger;
-use SoftCommerce\Core\Model\Source\Status;
+use SoftCommerce\Avocado\Model\Source\Status;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 

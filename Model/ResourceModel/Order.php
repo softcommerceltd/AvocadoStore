@@ -8,7 +8,7 @@ namespace SoftCommerce\Avocado\Model\ResourceModel;
 use Magento\Framework\DB\Select;
 use Magento\Framework\Exception\LocalizedException;
 use SoftCommerce\Avocado\Api\Data\OrderInterface;
-use SoftCommerce\Core\Model\Source\Status;
+use SoftCommerce\Avocado\Model\Source\Status;
 
 /**
  * Class Order

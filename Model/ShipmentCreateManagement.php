@@ -38,7 +38,7 @@ use SoftCommerce\Avocado\Api\ShipmentCreateManagementInterface;
 use SoftCommerce\Avocado\Api\ShipmentRepositoryInterface;
 use SoftCommerce\Avocado\Helper\Data as Helper;
 use SoftCommerce\Avocado\Logger\Logger;
-use SoftCommerce\Core\Model\Source\Status;
+use SoftCommerce\Avocado\Model\Source\Status;
 
 /**
  * Class OrderCollectManagement

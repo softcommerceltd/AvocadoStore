@@ -16,7 +16,7 @@ use Magento\Ui\Component\MassAction\Filter;
 use SoftCommerce\Avocado\Api\Data\OrderInterface;
 use SoftCommerce\Avocado\Api\OrderCreateManagementInterface;
 use SoftCommerce\Avocado\Model\ResourceModel;
-use SoftCommerce\Core\Model\Source\Status;
+use SoftCommerce\Avocado\Model\Source\Status;
 
 /**
  * Class MassCreate

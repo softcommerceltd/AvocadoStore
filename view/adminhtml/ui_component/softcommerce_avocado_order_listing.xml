@@ -138,7 +138,7 @@
         </column>
         <column name="status" component="Magento_Ui/js/grid/columns/select">
             <settings>
-                <options class="SoftCommerce\Core\Model\Source\Status"/>
+                <options class="SoftCommerce\Avocado\Model\Source\Status"/>
                 <filter>select</filter>
                 <editor>
                     <editorType>select</editorType>
