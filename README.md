@@ -51,7 +51,7 @@ php bin/magento setup:di:compile
 ```
 
 ## License
-Each source file included in this directory is licensed under OSL 3.0.
+Each source file included in this package is licensed under OSL 3.0.
 
 [Open Software License (OSL 3.0)](https://opensource.org/licenses/osl-3.0.php).
 Please see `LICENSE.txt` for full details of the OSL 3.0 license.
