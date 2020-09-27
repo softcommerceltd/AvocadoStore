@@ -29,3 +29,18 @@ Please see `LICENSE.txt` for full details of the OSL 3.0 license.
         https://softcommerce.co.uk/
     </a>
 </p>
+
+## 2. Installation
+
+### Install via composer (recommend)
+
+Run the following command in Magento 2 root folder:
+
+```
+composer require softcommerce/avocado
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+php bin/magento setup:static-content:deploy
+```
+
+
