@@ -32,5 +32,11 @@
                 "SoftCommerce/Avocado"
             ]
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/theexten/AvocadoStore_M24.git"
+        }
+    ]
 }
