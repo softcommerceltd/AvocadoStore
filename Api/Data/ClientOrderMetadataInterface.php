@@ -43,5 +43,5 @@ interface ClientOrderMetadataInterface
     const SHIP_ADDRESS_STREET               = 'ship-address-street';
 
     const BILL_ADDRESS_NO                   = 'bill-address-no';
-    const BUYER_ID                           = 'buyer-id';
+    const BUYER_ID                          = 'buyer-id';
 }
