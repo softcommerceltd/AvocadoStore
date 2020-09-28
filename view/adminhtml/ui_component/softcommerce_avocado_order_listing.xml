@@ -43,18 +43,18 @@
             <action name="create">
                 <settings>
                     <confirm>
-                        <message translate="true">create selected order(s)?</message>
+                        <message translate="true">Create orders for selected itemss?</message>
                         <title translate="true">Create order(s)</title>
                     </confirm>
                     <url path="softcommerce_avocado/order/massCreate"/>
                     <type>delete</type>
-                    <label translate="true">Create</label>
+                    <label translate="true">Create Order(s)</label>
                 </settings>
             </action>
             <action name="status">
                 <settings>
                     <type>status</type>
-                    <label translate="true">Change status</label>
+                    <label translate="true">Change Status</label>
                     <actions>
                         <action name="0">
                             <type>pending</type>
@@ -71,10 +71,10 @@
                             </url>
                         </action>
                         <action name="2">
-                            <type>success</type>
-                            <label translate="true">complete [submission complete]</label>
+                            <type>complete</type>
+                            <label translate="true">Complete [submission complete]</label>
                             <url path="softcommerce_avocado/order/massStatus">
-                                <param name="complete">success</param>
+                                <param name="complete">complete</param>
                             </url>
                         </action>
                     </actions>
@@ -84,11 +84,11 @@
                 <settings>
                     <confirm>
                         <message translate="true">Delete selected order(s)?</message>
-                        <title translate="true">Delete order(s)</title>
+                        <title translate="true">Delete Order(s)</title>
                     </confirm>
                     <url path="softcommerce_avocado/order/massDelete"/>
                     <type>delete</type>
-                    <label translate="true">Delete</label>
+                    <label translate="true">Delete Order(s)</label>
                 </settings>
             </action>
         </massaction>

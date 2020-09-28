@@ -105,20 +105,6 @@
         <plugin name="avocado_order_id_provider_plugin" type="SoftCommerce\Avocado\Plugin\Sales\Order\GetAvocadoOrderIdForOrderPlugin"/>
     </type>
     <!-- custom metadata to sales order grid -->
-    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid">
-        <arguments>
-            <argument name="joins" xsi:type="array">
-                <item name="softcommerce_avocado_order" xsi:type="array">
-                    <item name="table" xsi:type="string">softcommerce_avocado_order</item>
-                    <item name="origin_column" xsi:type="string">entity_id</item>
-                    <item name="target_column" xsi:type="string">order_id</item>
-                </item>
-            </argument>
-            <argument name="columns" xsi:type="array">
-                <item name="avocado_order_id" xsi:type="string">softcommerce_avocado_order.avocado_order_id</item>
-            </argument>
-        </arguments>
-    </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <plugin name="sales_order_grid_avocado_order_id_provider" type="SoftCommerce\Avocado\Plugin\Sales\Order\SalesOrderGridAvocadoOrderIdProviderPlugin" sortOrder="1"/>
     </type>

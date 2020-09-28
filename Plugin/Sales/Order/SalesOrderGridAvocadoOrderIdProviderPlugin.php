@@ -31,7 +31,7 @@ class SalesOrderGridAvocadoOrderIdProviderPlugin
             $collection->getSelect()
                 ->joinLeft(
                     ['sao_tb' => $collection->getResource()->getTable(OrderInterface::DB_TABLE_NAME)],
-                    'sao_tb.' . OrderInterface::ORDER_ID . ' = main_table.entity_id',
+                    'sao_tb.' . OrderInterface::ORDER_ID . ' = main_table.' . OrderInterface::ENTITY_ID,
                     [OrderInterface::AVOCADO_ORDER_ID]
                 );
         } catch (\Zend_Db_Select_Exception $selectException) {

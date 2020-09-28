@@ -5,7 +5,9 @@
  */
 namespace SoftCommerce\Avocado\Ui\Component\Listing\Columns;
 
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Ui\Component\Listing\Columns\Column;
+use SoftCommerce\Avocado\Api\Data\OrderInterface;
 
 /**
  * Class OrderId
@@ -14,27 +16,31 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class OrderId extends Column
 {
     /**
-     * @inheritDoc
+     * @param array $dataSource
+     * @return array
+     * @throws NoSuchEntityException
      */
-    protected function applySorting()
+    public function prepareDataSource(array $dataSource)
     {
-        $sorting = $this->getContext()->getRequestParam('sorting');
-        $isSortable = $this->getData('config/sortable');
-        if ($isSortable !== false
-            && !empty($sorting['field'])
-            && !empty($sorting['direction'])
-            && $sorting['field'] === $this->getName()
-        ) {
-            $collection = $this->getContext()->getDataProvider()->getCollection();
-            $collection->joinField(
-                'attribute_set',
-                'eav_attribute_set',
-                'attribute_set_name',
-                'attribute_set_id=attribute_set_id',
-                null,
-                'left'
-            );
-            $collection->getSelect()->order('attribute_set_name ' . $sorting['direction']);
+        if (isset($dataSource['data']['items'])) {
+            foreach ($dataSource['data']['items'] as & $item) {
+                if (!isset($item[$this->getData('name')], $item[OrderInterface::ORDER_ID], $item[OrderInterface::INCREMENT_ID])) {
+                    continue;
+                }
+
+                $item[$this->getData('name')] = [
+                    'edit' => [
+                        'href' => $this->context->getUrl(
+                            'sales/order/view',
+                            ['order_id' => $item[OrderInterface::ORDER_ID]]
+                        ),
+                        'label' => __('View'),
+                        'hidden' => false,
+                    ]
+                ];
+            }
         }
+
+        return $dataSource;
     }
 }
