@@ -43,8 +43,7 @@ class CreateOrder extends AbstractCommand
         State $appState,
         Logger $logger,
         SearchCriteriaBuilder $searchCriteriaBuilder,
-        string
-       $name = null
+        string $name = null
     ) {
         $this->_orderCreateManagement = $orderCreateManagement;
         parent::__construct($appState, $logger, $searchCriteriaBuilder, $name);

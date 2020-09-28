@@ -5,10 +5,6 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
     <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
-        <attribute code="avocado_order_id" type="string">
-            <join reference_table="softcommerce_avocado_order" join_on_field="entity_id" reference_field="order_id">
-                <field column="avocado_order_id">avocado_order_id</field>
-            </join>
-        </attribute>
+        <attribute code="avocado_order_id" type="string"/>
     </extension_attributes>
 </config>

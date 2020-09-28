@@ -75,7 +75,9 @@ class MassCreate extends AbstractMassAction implements HttpPostActionInterface
             ->addFilter(OrderInterface::ENTITY_ID, $ids, 'in')
             ->create();
 
-        $this->_orderCreateManagement->setSearchCriteriaRequest($searchCriteria);
+        $this->_orderCreateManagement
+            ->setCanExecuteFlag(true)
+            ->setSearchCriteriaRequest($searchCriteria);
 
         try {
             $this->_orderCreateManagement->execute();

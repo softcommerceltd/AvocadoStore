@@ -32,7 +32,7 @@ class Index extends Action implements HttpGetActionInterface
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->setActiveMenu(self::ADMIN_RESOURCE)
             ->addBreadcrumb(__('Shipment'), __('Listing'));
-        $resultPage->getConfig()->getTitle()->prepend(__('View Shipments'));
+        $resultPage->getConfig()->getTitle()->prepend(__('View Avocado Shipments'));
 
         return $resultPage;
     }

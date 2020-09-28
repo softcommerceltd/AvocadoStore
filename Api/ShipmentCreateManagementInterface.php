@@ -13,6 +13,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
  */
 interface ShipmentCreateManagementInterface
 {
+    const SOURCE_LOCATION = 'avocado';
+
     /**
      * @param null $key
      * @return array|mixed

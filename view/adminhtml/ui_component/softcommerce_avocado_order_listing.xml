@@ -132,7 +132,7 @@
         </column>
         <column name="avocado_order_id">
             <settings>
-                <filter>textRange</filter>
+                <filter>text</filter>
                 <label translate="true">Avocado Order ID</label>
             </settings>
         </column>
@@ -149,7 +149,7 @@
         </column>
         <column name="increment_id">
             <settings>
-                <filter>textRange</filter>
+                <filter>text</filter>
                 <label translate="true">Order ID</label>
             </settings>
         </column>

@@ -160,6 +160,11 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
     private ?SearchCriteriaInterface $_searchCriteriaRequest = null;
 
     /**
+     * @var bool
+     */
+    private bool $_canExecuteFlag = false;
+
+    /**
      * OrderCreateManagement constructor.
      * @param AppState $appState
      * @param BackendSessionQuote $backendSessionQuote
@@ -170,6 +175,8 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @param OrderRepositoryInterface $orderRepository
      * @param InvoiceService $invoiceService
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param FilterGroupBuilder $filterGroupBuilder
+     * @param FilterBuilder $filterBuilder
      * @param QuoteFactory $quoteFactory
      * @param CartManagementInterface $quoteManagement
      * @param CartRepositoryInterface $quoteRepository
@@ -270,6 +277,16 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
     }
 
     /**
+     * @param bool $flag
+     * @return $this
+     */
+    public function setCanExecuteFlag(bool $flag)
+    {
+        $this->_canExecuteFlag = $flag;
+        return $this;
+    }
+
+    /**
      * @return OrderCreateManagement
      */
     public function executeBefore()
@@ -286,7 +303,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
     {
         $this->executeBefore();
 
-        if (!$this->_helper->getIsActive()) {
+        if (!$this->_canExecute()) {
             return $this;
         }
 
@@ -348,6 +365,19 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
         $this->setResponse($this->_localResponse);
         $this->_logger->log(100, __METHOD__, $this->getResponse());
         return parent::executeAfter();
+    }
+
+    /**
+     * @return bool
+     * @throws NoSuchEntityException
+     */
+    private function _canExecute()
+    {
+        if (false !== $this->_canExecuteFlag) {
+            return $this->_canExecuteFlag;
+        }
+
+        return $this->_helper->getIsActive();
     }
 
     /**

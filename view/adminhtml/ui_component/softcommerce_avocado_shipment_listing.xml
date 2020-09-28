@@ -132,25 +132,25 @@
         </column>
         <column name="increment_id">
             <settings>
-                <filter>textRange</filter>
+                <filter>text</filter>
                 <label translate="true">Shipment ID</label>
             </settings>
         </column>
-        <column name="order_increment_id">
+        <column name="parent_id">
             <settings>
-                <filter>textRange</filter>
-                <label translate="true">Order ID</label>
+                <filter>text</filter>
+                <label translate="true">Parent ID</label>
             </settings>
         </column>
         <column name="track_no">
             <settings>
-                <filter>textRange</filter>
+                <filter>text</filter>
                 <label translate="true">Track No</label>
             </settings>
         </column>
         <column name="service_provider">
             <settings>
-                <filter>textRange</filter>
+                <filter>text</filter>
                 <label translate="true">Service</label>
             </settings>
         </column>

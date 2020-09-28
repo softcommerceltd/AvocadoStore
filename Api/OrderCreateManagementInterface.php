@@ -83,6 +83,12 @@ interface OrderCreateManagementInterface
     public function setSearchCriteriaRequest(SearchCriteriaInterface $searchCriteriaRequest);
 
     /**
+     * @param bool $flag
+     * @return $this
+     */
+    public function setCanExecuteFlag(bool $flag);
+
+    /**
      * @return $this
      * @throws NoSuchEntityException
      */

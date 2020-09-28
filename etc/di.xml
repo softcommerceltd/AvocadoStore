@@ -83,6 +83,7 @@
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
+                <item name="collect_order" xsi:type="object">SoftCommerce\Avocado\Console\Command\CollectOrder</item>
                 <item name="create_order" xsi:type="object">SoftCommerce\Avocado\Console\Command\CreateOrder</item>
             </argument>
         </arguments>
