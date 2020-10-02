@@ -9,10 +9,13 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\CsrfAwareActionInterface;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Serialize\Serializer\Json;
 use SoftCommerce\Avocado\Api\OrderCollectManagementInterface;
 use SoftCommerce\Avocado\Logger\Logger;
+use SoftCommerce\Avocado\Model\Order\FileProcessorInterface;
 
 /**
  * Class Collect
@@ -26,23 +29,39 @@ class Collect extends Action implements CsrfAwareActionInterface, HttpPostAction
     private OrderCollectManagementInterface $_orderCollectManagement;
 
     /**
+     * @var FileProcessorInterface
+     */
+    private FileProcessorInterface $_fileProcessor;
+
+    /**
      * @var Logger
      */
     private Logger $_logger;
 
     /**
+     * @var Json|null
+     */
+    private ?Json $_serializer;
+
+    /**
      * Collect constructor.
      * @param OrderCollectManagementInterface $orderCollectManagement
+     * @param FileProcessorInterface $fileProcessor
      * @param Logger $logger
      * @param Context $context
+     * @param Json|null $serializer
      */
     public function __construct(
         OrderCollectManagementInterface $orderCollectManagement,
+        FileProcessorInterface $fileProcessor,
         Logger $logger,
-        Context $context
+        Context $context,
+        ?Json $serializer = null
     ) {
         $this->_orderCollectManagement = $orderCollectManagement;
+        $this->_fileProcessor = $fileProcessor;
         $this->_logger = $logger;
+        $this->_serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
         parent::__construct($context);
     }
 
@@ -56,6 +75,12 @@ class Collect extends Action implements CsrfAwareActionInterface, HttpPostAction
         }
 
         try {
+            $source = $this->_serializer->unserialize($request);
+            $this->_fileProcessor->downloadSource($source['exportUrl'] ?? '');
+            if (!$sourceData = $this->_fileProcessor->getSourceData()) {
+                return;
+            }
+
             $this->_orderCollectManagement
                 ->setSource($request)
                 ->execute();

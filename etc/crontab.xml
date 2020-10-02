@@ -9,7 +9,7 @@
             <schedule>*/15 * * * *</schedule>
         </job -->
         <job name="softcommerce_avocado_shipment_submit_service" instance="SoftCommerce\Avocado\Cron\Backend\ShipmentSubmitService" method="execute">
-            <schedule>*/15 * * * *</schedule>
+            <schedule>0 */4 * * *</schedule>
         </job>
     </group>
 </config>

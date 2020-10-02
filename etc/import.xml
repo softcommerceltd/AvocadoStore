@@ -4,5 +4,5 @@
  ~ See LICENSE.txt for license details.
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_ImportExport:etc/import.xsd">
-    <entity name="avocado_order" label="Avocado Order Import" model="SoftCommerce\Avocado\Model\ImportExport\OrderImport" behaviorModel="Magento\ImportExport\Model\Source\Import\Behavior\Basic" />
+    <entity name="avocado_order" label="Avocado Order" model="SoftCommerce\Avocado\Model\Import\Order" behaviorModel="SoftCommerce\Avocado\Model\Source\Import\Behaviour\AddNew" />
 </config>

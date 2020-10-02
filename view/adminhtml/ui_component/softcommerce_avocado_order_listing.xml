@@ -14,6 +14,18 @@
         <deps>
             <dep>softcommerce_avocado_order_listing.softcommerce_avocado_order_listing_data_source</dep>
         </deps>
+        <buttons>
+            <button name="add">
+                <url path="adminhtml/import/index"/>
+                <class>primary</class>
+                <label translate="true">Import Order</label>
+            </button>
+            <button name="avocado_shipment_list">
+                <url path="softcommerce_avocado/shipment/index"/>
+                <class>secondary</class>
+                <label translate="true">View Shipments</label>
+            </button>
+        </buttons>
     </settings>
     <dataSource name="softcommerce_avocado_order_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
@@ -74,7 +86,7 @@
                             <type>complete</type>
                             <label translate="true">Complete [submission complete]</label>
                             <url path="softcommerce_avocado/order/massStatus">
-                                <param name="complete">complete</param>
+                                <param name="status">complete</param>
                             </url>
                         </action>
                     </actions>

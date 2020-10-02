@@ -14,16 +14,16 @@ use Magento\Framework\Exception\LocalizedException;
 interface OrderCollectManagementInterface
 {
     /**
-     * @return string
+     * @return array
      * @throws LocalizedException
      */
-    public function getSource() : string;
+    public function getSource() : array;
 
     /**
-     * @param string $source
+     * @param array $source
      * @return $this
      */
-    public function setSource(string $source);
+    public function setSource(array $source);
 
     /**
      * @param int|string|null $key

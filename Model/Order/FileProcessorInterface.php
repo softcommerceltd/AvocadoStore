@@ -18,6 +18,17 @@ interface FileProcessorInterface
     const ENCLOSURE = '"';
 
     /**
+     * @return string
+     */
+    public function getDelimiter() : string;
+
+    /**
+     * @param string $delimiter
+     * @return $this
+     */
+    public function setDelimiter(string $delimiter);
+
+    /**
      * @param string $source
      * @return string|null
      * @throws FileSystemException

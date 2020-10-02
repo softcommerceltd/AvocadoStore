@@ -79,12 +79,33 @@
             </argument>
         </arguments>
     </type>
+    <!-- Collect Avocado Order by means of import -->
+    <preference for="SoftCommerce\Avocado\Model\Import\Order\ValidatorInterface" type="SoftCommerce\Avocado\Model\Import\Order\Validator"/>
+    <type name="SoftCommerce\Avocado\Model\Import\Order\Validator">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="order_entry" xsi:type="object">SoftCommerce\Avocado\Model\Import\Order\Validator\OrderEntry</item>
+                <item name="billing_entry" xsi:type="object">SoftCommerce\Avocado\Model\Import\Order\Validator\BillingEntry</item>
+                <item name="shipping_entry" xsi:type="object">SoftCommerce\Avocado\Model\Import\Order\Validator\ShippingEntry</item>
+                <item name="item_entry" xsi:type="object">SoftCommerce\Avocado\Model\Import\Order\Validator\ItemEntry</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\ImportExport\Model\Import\SampleFileProvider">
+        <arguments>
+            <argument name="samples" xsi:type="array">
+                <item name="avocado_order" xsi:type="string">SoftCommerce_Avocado</item>
+            </argument>
+        </arguments>
+    </type>
     <!-- CLI -->
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="collect_order" xsi:type="object">SoftCommerce\Avocado\Console\Command\CollectOrder</item>
                 <item name="create_order" xsi:type="object">SoftCommerce\Avocado\Console\Command\CreateOrder</item>
+                <item name="collect_shipment" xsi:type="object">SoftCommerce\Avocado\Console\Command\CollectShipment</item>
+                <item name="create_shipment" xsi:type="object">SoftCommerce\Avocado\Console\Command\CreateShipment</item>
             </argument>
         </arguments>
     </type>
@@ -108,5 +129,8 @@
     <!-- custom metadata to sales order grid -->
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <plugin name="sales_order_grid_avocado_order_id_provider" type="SoftCommerce\Avocado\Plugin\Sales\Order\SalesOrderGridAvocadoOrderIdProviderPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\ImportExport\Block\Adminhtml\Import\Frame\Result">
+        <plugin name="avocado_order_import_result_back_link_provider" type="SoftCommerce\Avocado\Plugin\ImportExport\AdminHtmlBlock\ImportFrameResultPlugin"/>
     </type>
 </config>

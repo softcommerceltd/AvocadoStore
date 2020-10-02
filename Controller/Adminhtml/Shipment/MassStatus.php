@@ -32,7 +32,7 @@ class MassStatus extends AbstractMassAction implements HttpPostActionInterface
             return $resultRedirect;
         }
 
-        if (!$status = (int) $this->getRequest()->getParam('status')) {
+        if (!$status = $this->getRequest()->getParam('status')) {
             $this->messageManager->addErrorMessage(__('Could not retrieve status request data for change.'));
             return $resultRedirect;
         }

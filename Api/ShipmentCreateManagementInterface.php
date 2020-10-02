@@ -69,6 +69,11 @@ interface ShipmentCreateManagementInterface
     public function addRequest($data, $key = null);
 
     /**
+     * @return array|null;
+     */
+    public function getTargetEntry();
+
+    /**
      * @return $this
      * @throws NoSuchEntityException
      */

@@ -15,6 +15,7 @@ use Magento\Framework\Filesystem\Io\File;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 
+use SoftCommerce\Avocado\Api\Data\ClientShipmentMetadataInterface;
 use SoftCommerce\Avocado\Api\Data\OrderInterface;
 use SoftCommerce\Avocado\Api\Data\ShipmentInterface;
 use SoftCommerce\Avocado\Api\ShipmentCreateManagementInterface;
@@ -106,6 +107,14 @@ class ShipmentCreateManagement extends AbstractManagement implements ShipmentCre
     }
 
     /**
+     * @return array|null;
+     */
+    public function getTargetEntry()
+    {
+        return $this->_targetEntry;
+    }
+
+    /**
      * @return $this|ShipmentCreateManagement
      * @throws LocalizedException
      */
@@ -153,7 +162,7 @@ class ShipmentCreateManagement extends AbstractManagement implements ShipmentCre
             ? Status::ERROR
             : Status::COMPLETE;
 
-        if (!$ids = array_keys($this->_getTargetEntry())) {
+        if (!$ids = array_keys($this->getTargetEntry())) {
             return $this;
         }
 
@@ -197,15 +206,19 @@ class ShipmentCreateManagement extends AbstractManagement implements ShipmentCre
      */
     private function _generate()
     {
-        if (empty($this->_getTargetEntry())) {
+        if (empty($this->getTargetEntry())) {
             return $this;
         }
 
         $this->addRequest(
-            ['order', 'tracking_id', 'package_company']
+            [
+                ClientShipmentMetadataInterface::ORDER,
+                ClientShipmentMetadataInterface::TRACKING_ID,
+                ClientShipmentMetadataInterface::PACKAGE_COMPANY
+            ]
         );
 
-        foreach ($this->_getTargetEntry() as $item) {
+        foreach ($this->getTargetEntry() as $item) {
             if (!isset($item[OrderInterface::AVOCADO_ORDER_ID],
                 $item[ShipmentInterface::TRACK_NO],
                 $item[ShipmentInterface::SERVICE_PROVIDER])
@@ -215,9 +228,9 @@ class ShipmentCreateManagement extends AbstractManagement implements ShipmentCre
 
             $this->addRequest(
                 [
-                    'order' => $item[OrderInterface::AVOCADO_ORDER_ID],
-                    'tracking_id' => $item[ShipmentInterface::TRACK_NO],
-                    'package_company' => $item[ShipmentInterface::SERVICE_PROVIDER]
+                    ClientShipmentMetadataInterface::ORDER => $item[OrderInterface::AVOCADO_ORDER_ID],
+                    ClientShipmentMetadataInterface::TRACKING_ID => $item[ShipmentInterface::TRACK_NO],
+                    ClientShipmentMetadataInterface::PACKAGE_COMPANY => $item[ShipmentInterface::SERVICE_PROVIDER]
                 ]
             );
         }
@@ -249,13 +262,5 @@ class ShipmentCreateManagement extends AbstractManagement implements ShipmentCre
             ->appendData($sourceDir . '/shipment.csv', $this->getRequest());
 
         return $this;
-    }
-
-    /**
-     * @return array|null;
-     */
-    private function _getTargetEntry()
-    {
-        return $this->_targetEntry;
     }
 }

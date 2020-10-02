@@ -7,12 +7,11 @@ namespace SoftCommerce\Avocado\Console\Command;
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Area;
-use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\State;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Serialize\Serializer\Json;
 use SoftCommerce\Avocado\Api\OrderCollectManagementInterface;
 use SoftCommerce\Avocado\Logger\Logger;
+use SoftCommerce\Avocado\Model\Order\FileProcessorInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -32,29 +31,29 @@ class CollectOrder extends AbstractCommand
     private OrderCollectManagementInterface $_orderCollectManagement;
 
     /**
-     * @var Json|null
+     * @var FileProcessorInterface
      */
-    private ?Json $_serializer;
+    private FileProcessorInterface $_fileProcessor;
 
     /**
      * CollectOrder constructor.
      * @param OrderCollectManagementInterface $orderCollectManagement
+     * @param FileProcessorInterface $fileProcessor
      * @param State $appState
      * @param Logger $logger
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param string|null $name
-     * @param Json|null $serializer
      */
     public function __construct(
         OrderCollectManagementInterface $orderCollectManagement,
+        FileProcessorInterface $fileProcessor,
         State $appState,
         Logger $logger,
         SearchCriteriaBuilder $searchCriteriaBuilder,
-        string $name = null,
-        ?Json $serializer = null
+        string $name = null
     ) {
         $this->_orderCollectManagement = $orderCollectManagement;
-        $this->_serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
+        $this->_fileProcessor = $fileProcessor;
         parent::__construct($appState, $logger, $searchCriteriaBuilder, $name);
     }
 
@@ -86,12 +85,19 @@ class CollectOrder extends AbstractCommand
             );
         }
 
-        $source = $this->_serializer->serialize(['exportUrl' => $sourceFilter]);
-        $this->_orderCollectManagement->setSource($source);
-        $output->writeln(sprintf('<info>Collecting Avocado orders by source %s.</info>', $source));
+        $output->writeln(sprintf('<info>Collecting Avocado orders by source %s.</info>', $sourceFilter));
 
         try {
-            $this->_orderCollectManagement->execute();
+            $this->_fileProcessor
+                // ->setDelimiter(',')
+                ->downloadSource($sourceFilter);
+            if (!$sourceData = $this->_fileProcessor->getSourceData()) {
+                return;
+            }
+
+            $this->_orderCollectManagement
+                ->setSource($sourceData)
+                ->execute();
         } catch (\Exception $e) {
             $this->_logger->log(100, $e->getMessage());
             return;

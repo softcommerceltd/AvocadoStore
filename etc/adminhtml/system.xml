@@ -14,7 +14,7 @@
                 <label>General</label>
                 <field id="version" type="note" translate="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Version</label>
-                    <frontend_model>SoftCommerce\MintSoft\Block\Adminhtml\System\Config\Form\Field\Version</frontend_model>
+                    <frontend_model>SoftCommerce\Avocado\Block\Adminhtml\System\Config\Form\Field\Version</frontend_model>
                     <comment>Current module version</comment>
                 </field>
             </group>

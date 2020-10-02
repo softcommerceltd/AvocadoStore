@@ -36,14 +36,13 @@ class OrderCollectManagement extends AbstractManagement implements
     private ResourceModel\Order $_resource;
 
     /**
-     * @var string|null
+     * @var array
      */
-    private ?string $_source = null;
+    private array $_source = [];
 
     /**
      * OrderCollectManagement constructor.
      * @param ResourceModel\Order $resource
-     * @param Order\FileProcessorInterface $fileProcessor
      * @param Data $helper
      * @param DateTime $dateTime
      * @param Logger $logger
@@ -51,41 +50,34 @@ class OrderCollectManagement extends AbstractManagement implements
      */
     public function __construct(
         ResourceModel\Order $resource,
-        Order\FileProcessorInterface $fileProcessor,
         Data $helper,
         DateTime $dateTime,
         Logger $logger,
         ?Json $serializer = null
     ) {
         $this->_resource = $resource;
-        $this->_fileProcessor = $fileProcessor;
         parent::__construct($helper, $dateTime, $logger, $serializer);
     }
 
     /**
-     * @return string
+     * @return array
      * @throws LocalizedException
      */
-    public function getSource() : string
+    public function getSource() : array
     {
-        if (null === $this->_source) {
-            throw new LocalizedException(__('Source is not set.'));
+        if (!$this->_source) {
+            throw new LocalizedException(__('Source data is not set.'));
         }
         return $this->_source;
     }
 
     /**
-     * @param string $source
+     * @param array $source
      * @return $this|OrderCollectManagement
-     * @throws LocalizedException
      */
-    public function setSource(string $source)
+    public function setSource(array $source)
     {
-        $source = $this->_serializer->unserialize($source);
-        if (!isset($source['exportUrl'])) {
-            throw new LocalizedException(__('Could not retrieve source data.'));
-        }
-        $this->_source = $source['exportUrl'];
+        $this->_source = $source;
         return $this;
     }
 
@@ -141,17 +133,18 @@ class OrderCollectManagement extends AbstractManagement implements
     {
         $this->executeBefore();
 
-        if (!$this->_helper->getIsActive() || !$this->getSource()) {
+        if (!$this->_helper->getIsActive()) {
             return $this;
         }
 
+        /*
         $this->_fileProcessor->downloadSource($this->getSource());
         if (!$sourceData = $this->_fileProcessor->getSourceData()) {
             return $this;
-        }
+        }*/
 
         try {
-            $this->_buildRequest($sourceData)
+            $this->_buildRequest()
                 ->_submit();
         } catch (\Exception $e) {
             $this->_logger->log(100, __METHOD__, [$e->getMessage()]);
@@ -161,12 +154,12 @@ class OrderCollectManagement extends AbstractManagement implements
     }
 
     /**
-     * @param array $sourceData
      * @return $this
      * @throws LocalizedException
      */
-    private function _buildRequest(array $sourceData)
+    private function _buildRequest()
     {
+        $sourceData = $this->getSource();
         $requestIds = array_unique(array_column($sourceData, ClientOrderMetadataInterface::ORDER_ID));
         $requestIds = array_map(function ($data) {
             $data = explode('-', $data);

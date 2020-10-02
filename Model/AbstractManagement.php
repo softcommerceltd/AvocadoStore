@@ -160,9 +160,9 @@ abstract class AbstractManagement
      */
     public function addRequest($data, $key = null)
     {
-        null !== $key
+        null !== $key && $data
             ? $this->_request[$key][] = $data
-            : $this->_request[] = $data;
+            : ($data ? $this->_request[] = $data : null);
         return $this;
     }
 

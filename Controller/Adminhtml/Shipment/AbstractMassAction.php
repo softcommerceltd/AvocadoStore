@@ -27,7 +27,7 @@ abstract class AbstractMassAction extends Action
      * @see _isAllowed()
      */
     const ADMIN_RESOURCE = 'SoftCommerce_Avocado::shipment_list';
-    const REDIRECT_URL = 'SoftCommerce_Avocado/shipment/index';
+    const REDIRECT_URL = 'softcommerce_avocado/shipment/index';
 
     /**
      * @var Filter

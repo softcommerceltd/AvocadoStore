@@ -36,7 +36,7 @@ class Shipment extends AbstractResource
             ->joinLeft(
                 ['sas_tb' => $adapter->getTableName(OrderInterface::DB_TABLE_NAME)],
                 'sao_tb.parent_id = sas_tb.entity_id',
-                [OrderInterface::AVOCADO_ORDER_ID]
+                [OrderInterface::ORDER_ID, OrderInterface::AVOCADO_ORDER_ID]
             )->where('sao_tb.' . ShipmentInterface::STATUS . ' = ?', Status::PENDING);
 
         return $adapter->fetchAssoc($select);

@@ -49,6 +49,8 @@ class FileProcessor implements FileProcessorInterface
      */
     private Logger $_logger;
 
+    private $_delimiter;
+
     /**
      * FileProcessor constructor.
      * @param Csv $csvParser
@@ -69,6 +71,24 @@ class FileProcessor implements FileProcessorInterface
         $this->_file = $file;
         $this->_filesystem = $filesystem;
         $this->_logger = $logger;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDelimiter() : string
+    {
+        return $this->_delimiter ?: self::DELIMITER;
+    }
+
+    /**
+     * @param string $delimiter
+     * @return $this
+     */
+    public function setDelimiter(string $delimiter)
+    {
+        $this->_delimiter = $delimiter;
+        return $this;
     }
 
     /**
@@ -110,11 +130,15 @@ class FileProcessor implements FileProcessorInterface
         }
 
         $this->_csvParser
-            ->setDelimiter(self::DELIMITER)
+            ->setDelimiter($this->getDelimiter())
             ->setEnclosure(self::ENCLOSURE);
         if (!$data = $this->_csvParser->getData($this->_source)) {
             return [];
         }
+
+        $data[0] = array_map(function ($value) {
+            return str_replace('-', '_', $value);
+        }, current($data));
 
         array_walk($data, function (&$a) use ($data) {
             $a = array_combine($data[0], $a);

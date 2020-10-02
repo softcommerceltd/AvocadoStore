@@ -10,17 +10,22 @@
         </item>
     </argument>
     <settings>
+        <spinner>softcommerce_avocado_shipment_columns</spinner>
+        <deps>
+            <dep>softcommerce_avocado_shipment_listing.softcommerce_avocado_shipment_listing_data_source</dep>
+        </deps>
         <buttons>
             <button name="add">
                 <url path="*/*/new"/>
                 <class>primary</class>
                 <label translate="true">Create New Shipment</label>
             </button>
+            <button name="avocado_order_list">
+                <url path="softcommerce_avocado/order/index"/>
+                <class>secondary</class>
+                <label translate="true">View Orders</label>
+            </button>
         </buttons>
-        <spinner>softcommerce_avocado_shipment_columns</spinner>
-        <deps>
-            <dep>softcommerce_avocado_shipment_listing.softcommerce_avocado_shipment_listing_data_source</dep>
-        </deps>
     </settings>
     <dataSource name="softcommerce_avocado_shipment_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
@@ -61,20 +66,27 @@
             <action name="status">
                 <settings>
                     <type>status</type>
-                    <label translate="true">Change status</label>
+                    <label translate="true">Change Status</label>
                     <actions>
                         <action name="0">
-                            <type>enable</type>
-                            <label translate="true">Active</label>
+                            <type>pending</type>
+                            <label translate="true">Pending [submission allowed]</label>
                             <url path="softcommerce_avocado/shipment/massStatus">
-                                <param name="status">1</param>
+                                <param name="status">pending</param>
                             </url>
                         </action>
                         <action name="1">
-                            <type>disable</type>
-                            <label translate="true">Inactive</label>
+                            <type>stopped</type>
+                            <label translate="true">Stopped [submission excluded]</label>
                             <url path="softcommerce_avocado/shipment/massStatus">
-                                <param name="status">2</param>
+                                <param name="status">stopped</param>
+                            </url>
+                        </action>
+                        <action name="2">
+                            <type>complete</type>
+                            <label translate="true">Complete [submission complete]</label>
+                            <url path="softcommerce_avocado/shipment/massStatus">
+                                <param name="status">complete</param>
                             </url>
                         </action>
                     </actions>
