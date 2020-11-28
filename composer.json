@@ -2,7 +2,7 @@
     "name": "softcommerce/avocado",
     "description": "Magento AvocadoStore Connector",
     "require": {
-        "php": "~7.4.0",
+        "php": "~7.3.0||~7.4.0",
         "magento/module-quote": "101.2.*",
         "magento/module-sales": "103.0.*",
         "magento/magento-composer-installer": "*"
