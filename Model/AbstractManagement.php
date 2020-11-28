@@ -7,6 +7,7 @@ namespace SoftCommerce\Avocado\Model;
 
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use SoftCommerce\Avocado\Helper\Data as Helper;
@@ -183,6 +184,7 @@ abstract class AbstractManagement
      * @param array $data
      * @param bool $force
      * @return $this
+     * @throws NoSuchEntityException
      */
     protected function _log(string $message, array $data = [], $force = false)
     {

@@ -11,6 +11,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\OrderExtensionFactory;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\ResourceModel\Order\Collection;
 use SoftCommerce\Avocado\Model\ResourceModel;
 
 /**
@@ -24,6 +25,9 @@ class GetAvocadoOrderIdForOrderPlugin
      */
     private OrderExtensionFactory $_orderExtensionFactory;
 
+    /**
+     * @var ResourceModel\Order
+     */
     private ResourceModel\Order $_orderResource;
 
     /**
@@ -47,8 +51,35 @@ class GetAvocadoOrderIdForOrderPlugin
      */
     public function afterGet(OrderRepositoryInterface $orderRepository, OrderInterface $order): OrderInterface
     {
-        $extension = $order->getExtensionAttributes();
+        $this->setExtensionAttribute($order);
+        return $order;
+    }
 
+    /**
+     * @param OrderRepositoryInterface $subject
+     * @param Collection $resultOrder
+     * @return Collection
+     * @throws LocalizedException
+     */
+    public function afterGetList(
+        OrderRepositoryInterface $subject,
+        Collection $resultOrder
+    ) {
+        /** @var $order */
+        foreach ($resultOrder->getItems() as $order) {
+            $this->afterGet($subject, $order);
+        }
+        return $resultOrder;
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @return OrderInterface
+     * @throws LocalizedException
+     */
+    private function setExtensionAttribute(OrderInterface $order)
+    {
+        $extension = $order->getExtensionAttributes();
         if (null === $extension) {
             $extension = $this->_orderExtensionFactory->create();
         }
@@ -61,8 +92,6 @@ class GetAvocadoOrderIdForOrderPlugin
             $extension->setAvocadoOrderId($avocadoOrderId);
         }
 
-        $order->setExtensionAttributes($extension);
-
-        return $order;
+        return $order->setExtensionAttributes($extension);
     }
 }

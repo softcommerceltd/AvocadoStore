@@ -24,6 +24,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Phrase;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Stdlib\DateTime\DateTime;
+use Magento\OfflinePayments\Model\Checkmo;
 use Magento\Quote\Api\CartManagementInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\PaymentInterface;
@@ -577,9 +578,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
 
         $minCost = min(array_column($shippingRates, 'price'));
         $result = array_search($minCost, array_column($shippingRates, 'price'));
-        $shippingRates = isset($shippingRates[$result])
-            ? $shippingRates[$result]
-            : current($shippingRates);
+        $shippingRates = $shippingRates[$result] ?? current($shippingRates);
 
         if (!isset($shippingRates['code'], $shippingRates['price'], $shippingRates['method_title'])
             || !$shippingCode = $shippingRates['code']
@@ -601,7 +600,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
         /** @todo implement purchaseorder for admin only */
         $quote->getPayment()->importData(
             [
-                PaymentInterface::KEY_METHOD => \Magento\OfflinePayments\Model\Checkmo::PAYMENT_METHOD_CHECKMO_CODE,
+                PaymentInterface::KEY_METHOD => Checkmo::PAYMENT_METHOD_CHECKMO_CODE,
                 // PaymentInterface::KEY_PO_NUMBER => $clientOrder->getAvocadoOrderId()
             ]
         );
