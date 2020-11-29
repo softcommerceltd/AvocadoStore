@@ -123,6 +123,9 @@
         </arguments>
     </type>
     <!-- plugins -->
+    <type name="SoftCommerce\Shipping\Model\Carrier\RateProvider">
+        <plugin name="avocado_shipping_rate_plugin" type="SoftCommerce\Avocado\Plugin\Shipping\CarrierRateProvider"/>
+    </type>
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="avocado_order_id_provider_plugin" type="SoftCommerce\Avocado\Plugin\Sales\Order\GetAvocadoOrderIdForOrderPlugin"/>
     </type>

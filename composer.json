@@ -1,5 +1,5 @@
 {
-    "name": "softcommerce/avocado",
+    "name": "softcommerce/module-avocado",
     "description": "Magento AvocadoStore Connector",
     "require": {
         "php": "~7.4.0",
@@ -11,7 +11,7 @@
 
     },
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "license": [
         "OSL-3.0",
         "AFL-3.0"

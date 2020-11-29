@@ -70,19 +70,20 @@ class Collect extends Action implements CsrfAwareActionInterface, HttpPostAction
      */
     public function execute()
     {
-        if (!$request = $this->getRequest()->getContent()) {
-            return;
-        }
-
+        $request = $this->getRequest()->getContent();
         try {
-            $source = $this->_serializer->unserialize($request);
-            $this->_fileProcessor->downloadSource($source['exportUrl'] ?? '');
+            $request = $this->_serializer->unserialize($request);
+            if (!isset($request['exportUrl'])) {
+                return;
+            }
+
+            $this->_fileProcessor->downloadSource($request['exportUrl']);
             if (!$sourceData = $this->_fileProcessor->getSourceData()) {
                 return;
             }
 
             $this->_orderCollectManagement
-                ->setSource($request)
+                ->setSource($sourceData)
                 ->execute();
         } catch (\Exception $e) {
             $this->_logger->log(100, __METHOD__, ['error' => $e->getMessage(), 'request' => $request]);

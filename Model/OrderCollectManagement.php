@@ -133,15 +133,9 @@ class OrderCollectManagement extends AbstractManagement implements
     {
         $this->executeBefore();
 
-        if (!$this->_helper->getIsActive()) {
+        if (!$this->_helper->getIsActive() || !$this->getSource()) {
             return $this;
         }
-
-        /*
-        $this->_fileProcessor->downloadSource($this->getSource());
-        if (!$sourceData = $this->_fileProcessor->getSourceData()) {
-            return $this;
-        }*/
 
         try {
             $this->_buildRequest()
@@ -159,7 +153,10 @@ class OrderCollectManagement extends AbstractManagement implements
      */
     private function _buildRequest()
     {
-        $sourceData = $this->getSource();
+        if (!$sourceData = $this->getSource()) {
+            return $this;
+        }
+
         $requestIds = array_unique(array_column($sourceData, ClientOrderMetadataInterface::ORDER_ID));
         $requestIds = array_map(function ($data) {
             $data = explode('-', $data);
