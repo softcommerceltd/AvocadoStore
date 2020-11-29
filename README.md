@@ -26,12 +26,12 @@ A plugin that integrates and synchronises data between Magento2 and AvocadoStore
 Run the following command from Magento root directory:
 
 ```
-composer config repositories.softcommerce-avocado vcs https://github.com/theexten/AvocadoStore_M24.git
-composer require softcommerce/avocado
+composer config repositories.softcommerce-avocado vcs https://github.com/softcommerceltd/AvocadoStore.git
+composer require softcommerce/module-avocado
 ```
 If you receive an error regarding php incompatibility, but you are sure your php version is compatible, then use --ignore-platform-reqs
 ```
-composer require softcommerce/avocado --ignore-platform-reqs
+composer require softcommerce/module-avocado --ignore-platform-reqs
 ```
 
 ### Post Installation
