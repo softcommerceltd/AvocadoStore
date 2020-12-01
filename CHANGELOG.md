@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.0.4
+- **Fix**: Changes to composer.json
+
 ### Version 1.0.3
 - **Compatibility**: Added compatibility for MySQL 8.
 
