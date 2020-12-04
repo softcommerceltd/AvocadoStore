@@ -7,8 +7,6 @@
 declare(strict_types=1);
 namespace SoftCommerce\Avocado\Plugin\Shipping;
 
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 use SoftCommerce\Avocado\Api\Data\OrderInterface;
 use SoftCommerce\Shipping\Model\Carrier\RateProvider;
@@ -22,11 +20,9 @@ class CarrierRateProvider
 {
     /**
      * @param RateProvider $subject
-     * @param Method $result
+     * @param $result
      * @param array $request
      * @return Method
-     * @throws LocalizedException
-     * @throws NoSuchEntityException
      */
     public function afterCreateShippingMethod(
         RateProvider $subject,
