@@ -59,7 +59,7 @@
                         <title translate="true">Create order(s)</title>
                     </confirm>
                     <url path="softcommerce_avocado/order/massCreate"/>
-                    <type>delete</type>
+                    <type>create</type>
                     <label translate="true">Create Order(s)</label>
                 </settings>
             </action>
