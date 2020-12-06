@@ -55,7 +55,7 @@
             <action name="create">
                 <settings>
                     <confirm>
-                        <message translate="true">Create orders for selected itemss?</message>
+                        <message translate="true">Create orders for selected items?</message>
                         <title translate="true">Create order(s)</title>
                     </confirm>
                     <url path="softcommerce_avocado/order/massCreate"/>

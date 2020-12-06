@@ -85,7 +85,7 @@ class MassCreate extends AbstractMassAction implements HttpPostActionInterface
             $this->messageManager->addErrorMessage($e->getMessage());
         }
 
-        $this->_buildMessageResponseHtml($this->_orderCreateManagement->getResponse());
+        $this->buildMessageResponseHtml($this->_orderCreateManagement->getResponse());
 
         return $resultRedirect;
     }
@@ -94,7 +94,7 @@ class MassCreate extends AbstractMassAction implements HttpPostActionInterface
      * @param $response
      * @return $this
      */
-    private function _buildMessageResponseHtml($response)
+    private function buildMessageResponseHtml($response)
     {
         if (!is_array($response)) {
             $this->messageManager->addSuccessMessage($response);

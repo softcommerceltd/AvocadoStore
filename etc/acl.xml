@@ -15,8 +15,8 @@
                     </resource>
                 </resource>
                 <resource id="SoftCommerce_Avocado::core" title="SoftCommerce Avocado" translate="title" sortOrder="10">
-                    <resource id="SoftCommerce_Avocado::order_list" title="Order List" translate="title" sortOrder="20"/>
-                    <resource id="SoftCommerce_Avocado::shipment_list" title="Shipment List" translate="title" sortOrder="30"/>
+                    <resource id="SoftCommerce_Avocado::order_list" title="Order List" translate="title" sortOrder="10"/>
+                    <resource id="SoftCommerce_Avocado::shipment_list" title="Shipment List" translate="title" sortOrder="20"/>
                 </resource>
             </resource>
         </resources>

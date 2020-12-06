@@ -52,7 +52,7 @@ class MassStatus extends AbstractMassAction implements HttpPostActionInterface
             );
         } else {
             $this->messageManager->addSuccessMessage(
-                __('A total of %1 orders have been deleted.', is_int($result) ? $result : count($ids))
+                __('A total of %1 orders have been updated.', is_int($result) ? $result : count($ids))
             );
         }
 
