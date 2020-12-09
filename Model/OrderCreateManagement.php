@@ -53,117 +53,117 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
     /**
      * @var AppState
      */
-    private AppState $_appState;
+    private AppState $appState;
 
     /**
      * @var OrderRepositoryInterface
      */
-    private OrderRepositoryInterface $_orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
     /**
      * @var BackendSessionQuote
      */
-    private BackendSessionQuote $_backendSeesionQuote;
+    private BackendSessionQuote $backendSeesionQuote;
 
     /**
      * @var CheckoutSession
      */
-    private CheckoutSession $_checkoutSession;
+    private CheckoutSession $checkoutSession;
 
     /**
      * @var CurrencyFactory
      */
-    private CurrencyFactory $_currencyFactory;
+    private CurrencyFactory $currencyFactory;
 
     /**
      * @var ManagerInterface
      */
-    private ManagerInterface $_eventManagement;
+    private ManagerInterface $eventManagement;
 
     /**
      * @var ProductRepositoryInterface
      */
-    private ProductRepositoryInterface $_productRepository;
+    private ProductRepositoryInterface $productRepository;
 
     /**
      * @var InvoiceService
      */
-    private InvoiceService $_invoiceService;
+    private InvoiceService $invoiceService;
 
     /**
      * @var QuoteFactory
      */
-    private QuoteFactory $_quoteFactory;
+    private QuoteFactory $quoteFactory;
 
     /**
      * @var CartManagementInterface
      */
-    private CartManagementInterface $_quoteManagement;
+    private CartManagementInterface $quoteManagement;
 
     /**
      * @var CartRepositoryInterface
      */
-    private CartRepositoryInterface $_quoteRepository;
+    private CartRepositoryInterface $quoteRepository;
 
     /**
      * @var HistoryFactory
      */
-    private HistoryFactory $_salesOrderHistoryFactory;
+    private HistoryFactory $salesOrderHistoryFactory;
 
     /**
      * @var OrderStatusHistoryRepositoryInterface
      */
-    private OrderStatusHistoryRepositoryInterface $_salesOrderHistoryRepository;
+    private OrderStatusHistoryRepositoryInterface $salesOrderHistoryRepository;
 
     /**
      * @var SearchCriteriaBuilder
      */
-    private SearchCriteriaBuilder $_searchCriteriaBuilder;
+    private SearchCriteriaBuilder $searchCriteriaBuilder;
 
     /**
      * @var FilterGroupBuilder
      */
-    private FilterGroupBuilder $_filterGroupBuilder;
+    private FilterGroupBuilder $filterGroupBuilder;
 
     /**
      * @var FilterBuilder
      */
-    private FilterBuilder $_filterBuilder;
+    private FilterBuilder $filterBuilder;
 
     /**
      * @var StoreManagerInterface
      */
-    private StoreManagerInterface $_storeManager;
+    private StoreManagerInterface $storeManager;
 
     /**
      * @var TransactionFactory
      */
-    private TransactionFactory $_transactionFactory;
+    private TransactionFactory $transactionFactory;
 
     /**
      * @var SalesOrderInterface|null
      */
-    private ?SalesOrderInterface $_orderEntity = null;
+    private ?SalesOrderInterface $orderEntity = null;
 
     /**
      * @var OrderInterface|null
      */
-    private ?OrderInterface $_clientOrderEntity = null;
+    private ?OrderInterface $clientOrderEntity = null;
 
     /**
      * @var array
      */
-    private array $_localResponse = [];
+    private array $localResponse = [];
 
     /**
      * @var SearchCriteriaInterface|null
      */
-    private ?SearchCriteriaInterface $_searchCriteriaRequest = null;
+    private ?SearchCriteriaInterface $searchCriteriaRequest = null;
 
     /**
      * @var bool
      */
-    private bool $_canExecuteFlag = false;
+    private bool $canExecuteFlag = false;
 
     /**
      * OrderCreateManagement constructor.
@@ -214,24 +214,24 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
         Logger $logger,
         ?Json $serializer = null
     ) {
-        $this->_appState = $appState;
-        $this->_backendSeesionQuote = $backendSessionQuote;
-        $this->_checkoutSession = $checkoutSession;
-        $this->_currencyFactory = $currencyFactory;
-        $this->_eventManagement = $eventManager;
-        $this->_productRepository = $productRepository;
-        $this->_orderRepository = $orderRepository;
-        $this->_invoiceService = $invoiceService;
-        $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
-        $this->_filterGroupBuilder = $filterGroupBuilder;
-        $this->_filterBuilder = $filterBuilder;
-        $this->_quoteFactory = $quoteFactory;
-        $this->_quoteManagement = $quoteManagement;
-        $this->_quoteRepository = $quoteRepository;
-        $this->_salesOrderHistoryFactory = $salesOrderHistoryFactory;
-        $this->_salesOrderHistoryRepository = $salesOrderHistoryRepository;
-        $this->_storeManager = $storeManager;
-        $this->_transactionFactory = $transactionFactory;
+        $this->appState = $appState;
+        $this->backendSeesionQuote = $backendSessionQuote;
+        $this->checkoutSession = $checkoutSession;
+        $this->currencyFactory = $currencyFactory;
+        $this->eventManagement = $eventManager;
+        $this->productRepository = $productRepository;
+        $this->orderRepository = $orderRepository;
+        $this->invoiceService = $invoiceService;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->filterGroupBuilder = $filterGroupBuilder;
+        $this->filterBuilder = $filterBuilder;
+        $this->quoteFactory = $quoteFactory;
+        $this->quoteManagement = $quoteManagement;
+        $this->quoteRepository = $quoteRepository;
+        $this->salesOrderHistoryFactory = $salesOrderHistoryFactory;
+        $this->salesOrderHistoryRepository = $salesOrderHistoryRepository;
+        $this->storeManager = $storeManager;
+        $this->transactionFactory = $transactionFactory;
         parent::__construct($helper, $dateTime, $logger, $serializer);
     }
 
@@ -264,7 +264,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      */
     public function getSearchCriteriaRequest()
     {
-        return $this->_searchCriteriaRequest;
+        return $this->searchCriteriaRequest;
     }
 
     /**
@@ -273,7 +273,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      */
     public function setSearchCriteriaRequest(SearchCriteriaInterface $searchCriteriaRequest)
     {
-        $this->_searchCriteriaRequest = $searchCriteriaRequest;
+        $this->searchCriteriaRequest = $searchCriteriaRequest;
         return $this;
     }
 
@@ -283,7 +283,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      */
     public function setCanExecuteFlag(bool $flag)
     {
-        $this->_canExecuteFlag = $flag;
+        $this->canExecuteFlag = $flag;
         return $this;
     }
 
@@ -292,7 +292,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      */
     public function executeBefore()
     {
-        $this->_localResponse = [];
+        $this->localResponse = [];
         return parent::executeBefore();
     }
 
@@ -304,26 +304,26 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
     {
         $this->executeBefore();
 
-        if (!$this->_canExecute()) {
+        if (!$this->canExecute()) {
             return $this;
         }
 
         if (!$searchCriteria = $this->getSearchCriteriaRequest()) {
-            $filter = $this->_filterBuilder
+            $filter = $this->filterBuilder
                 ->setField(OrderInterface::STATUS)
                 ->setValue(Status::PENDING)
                 ->setConditionType('eq')
                 ->create();
-            $filterGroup[] = $this->_filterGroupBuilder->setFilters([$filter])->create();
+            $filterGroup[] = $this->filterGroupBuilder->setFilters([$filter])->create();
 
-            $filter = $this->_filterBuilder
+            $filter = $this->filterBuilder
                 ->setField(OrderInterface::ORDER_ID)
                 ->setValue(true)
                 ->setConditionType('null')
                 ->create();
-            $filterGroup[] = $this->_filterGroupBuilder->setFilters([$filter])->create();
+            $filterGroup[] = $this->filterGroupBuilder->setFilters([$filter])->create();
 
-            $searchCriteria = $this->_searchCriteriaBuilder
+            $searchCriteria = $this->searchCriteriaBuilder
                 ->setFilterGroups($filterGroup)
                 ->create();
         }
@@ -334,7 +334,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
             ->setCurrentPage($currentPage)
             ->setPageSize($pageSize);
 
-        $collection = $this->_orderRepository->getList($searchCriteria);
+        $collection = $this->orderRepository->getList($searchCriteria);
         if (!$collection->getTotalCount()) {
             $this->addResponse('Orders are up-to-date.', Status::COMPLETE);
             return $this;
@@ -343,15 +343,15 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
         $totalCount = (int) $collection->getTotalCount();
         while ($totalCount > 0) {
             try {
-                $this->_processMultiple($collection->getItems());
+                $this->processMultiple($collection->getItems());
             } catch (\Exception $e) {
-                $this->_localResponse[Status::ERROR] = [__METHOD__ => $e->getMessage()];
+                $this->localResponse[Status::ERROR] = [__METHOD__ => $e->getMessage()];
             }
 
             $searchCriteria = $collection->getSearchCriteria()
                 ->setCurrentPage(++$currentPage)
                 ->setPageSize($pageSize);
-            $collection = $this->_orderRepository->getList($searchCriteria);
+            $collection = $this->orderRepository->getList($searchCriteria);
             $totalCount = $totalCount - $pageSize;
         }
 
@@ -363,7 +363,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      */
     public function executeAfter()
     {
-        $this->setResponse($this->_localResponse);
+        $this->setResponse($this->localResponse);
         $this->_logger->log(100, __METHOD__, $this->getResponse());
         return parent::executeAfter();
     }
@@ -372,10 +372,10 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @return bool
      * @throws NoSuchEntityException
      */
-    private function _canExecute()
+    private function canExecute()
     {
-        if (false !== $this->_canExecuteFlag) {
-            return $this->_canExecuteFlag;
+        if (false !== $this->canExecuteFlag) {
+            return $this->canExecuteFlag;
         }
 
         return $this->_helper->getIsActive();
@@ -387,19 +387,19 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @throws CouldNotSaveException
      * @throws LocalizedException
      */
-    private function _processMultiple(array $clientOrders)
+    private function processMultiple(array $clientOrders)
     {
         /** @var OrderInterface $clientOrder */
         foreach ($clientOrders as $clientOrder) {
             try {
-                $this->_process($clientOrder);
+                $this->process($clientOrder);
             } catch (\Exception $e) {
                 $this->addResponse([$clientOrder->getAvocadoOrderId() => $e->getMessage()], Status::ERROR);
-                $this->_getClientOrder()
+                $this->getClientOrder()
                     ->setStatus(Status::ERROR)
                     ->setProcessedAt($this->_dateTime->gmtDate())
                     ->setMessage($this->_serializer->serialize($this->getResponse()));
-                $this->_orderRepository->save($this->_getClientOrder());
+                $this->orderRepository->save($this->getClientOrder());
                 $this->_logger->log(100, __METHOD__, [$clientOrder->getAvocadoOrderId() => $e->getMessage()]);
             }
         }
@@ -411,14 +411,14 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @param OrderInterface $clientOrder
      * @return $this
      */
-    private function _processBefore(OrderInterface $clientOrder)
+    private function processBefore(OrderInterface $clientOrder)
     {
         $this->_error =
         $this->_response =
             [];
 
-        $this->_orderEntity = null;
-        $this->_setClientOrder($clientOrder);
+        $this->orderEntity = null;
+        $this->setClientOrder($clientOrder);
         return $this;
     }
 
@@ -429,12 +429,12 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
-    private function _process(OrderInterface $clientOrder)
+    private function process(OrderInterface $clientOrder)
     {
-        $this->_processBefore($clientOrder)
-            ->_createOrder()
-            ->_createInvoice()
-            ->_processAfter();
+        $this->processBefore($clientOrder)
+            ->createOrder()
+            ->createInvoice()
+            ->processAfter();
 
         return $this;
     }
@@ -444,9 +444,13 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @throws CouldNotSaveException
      * @throws LocalizedException
      */
-    private function _processAfter()
+    private function processAfter()
     {
-        $this->_localResponse = array_merge($this->_localResponse, $this->getResponse());
+        if (null === $this->orderEntity) {
+            return $this;
+        }
+
+        $this->localResponse = array_merge($this->localResponse, $this->getResponse());
         $commentHtml = '<b>' . __('Avocado Synchronisation.') . '</b><br />';
         foreach ($this->getResponse() as $index => $data) {
             if (!is_array($data)) {
@@ -461,17 +465,18 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
             }
         }
 
-        $history = $this->_salesOrderHistoryFactory
+        $history = $this->salesOrderHistoryFactory
             ->create()
-            ->setParentId($this->_getSalesOrder()->getEntityId())
-            ->setStatus($this->_getSalesOrder()->getStatus() ?: Status::PROCESSING)
+            ->setParentId($this->getSalesOrder()->getEntityId())
+            ->setStatus($this->getSalesOrder()->getStatus() ?: Status::PROCESSING)
             ->setComment($commentHtml)
             ->setEntityName('order')
             ->setIsCustomerNotified(false)
             ->setIsVisibleOnFront(false);
-        $this->_salesOrderHistoryRepository->save($history);
+        $this->salesOrderHistoryRepository->save($history);
 
-        if ((array_key_exists(Status::SUCCESS, $this->getResponse()) && array_key_exists(Status::ERROR, $this->getResponse()))
+        if ((array_key_exists(Status::SUCCESS, $this->getResponse())
+                && array_key_exists(Status::ERROR, $this->getResponse()))
             || array_key_exists(Status::WARNING, $this->getResponse())
         ) {
             $status = Status::WARNING;
@@ -485,14 +490,14 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
             $status = Status::COMPLETE;
         }
 
-        $this->_getClientOrder()
-            ->setOrderId($this->_getSalesOrder()->getEntityId())
+        $this->getClientOrder()
+            ->setOrderId($this->getSalesOrder()->getEntityId())
             ->setStatus($status)
-            ->setIncrementId($this->_getSalesOrder()->getIncrementId())
-            ->setQuoteId($this->_getSalesOrder()->getQuoteId())
+            ->setIncrementId($this->getSalesOrder()->getIncrementId())
+            ->setQuoteId($this->getSalesOrder()->getQuoteId())
             ->setProcessedAt($this->_dateTime->gmtDate())
             ->setMessage($this->_serializer->serialize($this->getResponse()));
-        $this->_orderRepository->save($this->_getClientOrder());
+        $this->orderRepository->save($this->getClientOrder());
 
         return $this;
     }
@@ -502,15 +507,15 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
-    private function _createOrder()
+    private function createOrder()
     {
-        $clientOrder = $this->_getClientOrder();
+        $clientOrder = $this->getClientOrder();
         if ($clientOrder->getOrderId()) {
             $this->addResponse(
                 __(
                     'Order exists. [Order: %1, Avocado Order: %3]',
-                    $this->_getClientOrder()->getOrderId(),
-                    $this->_getClientOrder()->getAvocadoOrderId()
+                    $this->getClientOrder()->getOrderId(),
+                    $this->getClientOrder()->getAvocadoOrderId()
                 ),
                 Status::SUCCESS
             );
@@ -522,8 +527,8 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
             throw new LocalizedException(__('Could not retrieve client order items.'));
         }
 
-        $quote = $this->_quoteFactory->create();
-        $store = $this->_storeManager->getStore($this->_helper->getDefaultStore());
+        $quote = $this->quoteFactory->create();
+        $store = $this->storeManager->getStore($this->_helper->getDefaultStore());
         $quote->setStore($store)
             ->setStoreCurrencyCode($clientOrderEntry[ClientOrderMetadataInterface::CURRENCY] ?? 'EUR')
             ->setBaseCurrencyCode($store->getBaseCurrency()->getCode())
@@ -537,26 +542,26 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
             }
 
             $request = ['qty' => $item[ClientOrderMetadataInterface::QTY_PURCHASED]];
-            $product = $this->_productRepository->get($item[ClientOrderMetadataInterface::SKU]);
+            $product = $this->productRepository->get($item[ClientOrderMetadataInterface::SKU]);
             $quote->addProduct($product, new DataObject($request))
                 ->setOriginalCustomPrice($item[ClientOrderMetadataInterface::ITEM_PRICE] ?: $product->getPrice());
         }
 
         $quote
             ->getBillingAddress()
-            ->addData($this->_generateBillingAddress());
+            ->addData($this->generateBillingAddress());
         $quote
             ->getShippingAddress()
-            ->addData($this->_generateShippingAddress());
+            ->addData($this->generateShippingAddress());
 
-        $rates = $this->_currencyFactory
+        $rates = $this->currencyFactory
             ->create()
             ->getCurrencyRates($quote->getBaseCurrencyCode(), $quote->getStoreCurrencyCode());
         $rates =  current($rates) ?: 0;
         $shippingPrice = $clientOrderEntry[ClientOrderMetadataInterface::SHIPPING_PRICE] ?? 0;
         $baseShippingAmount = floor((float) $shippingPrice / (float) $rates);
 
-        $this->_backendSeesionQuote->setData(
+        $this->backendSeesionQuote->setData(
             [
                 OrderInterface::AVOCADO_ORDER_ID => $clientOrder->getAvocadoOrderId(),
                 OrderInterface::AVOCADO_BASE_SHIPPING_AMOUNT => $baseShippingAmount,
@@ -595,7 +600,7 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
             ->setShippingInclTax((float) $shippingPrice)
             ->setShippingDescription($shippingRates['method_title']);
 
-        $this->_quoteRepository->save($quote);
+        $this->quoteRepository->save($quote);
 
         /** @todo implement purchaseorder for admin only */
         $quote->getPayment()->importData(
@@ -605,16 +610,16 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
             ]
         );
 
-        $this->_quoteRepository->save($quote);
-        $this->_setSalesOrder($this->_quoteManagement->submit($quote));
-        $this->_getSalesOrder()->setEmailSent(0);
-        $this->_eventManagement->dispatch('sales_order_place_after', ['order' => $this->_getSalesOrder()]);
+        $this->quoteRepository->save($quote);
+        $this->setSalesOrder($this->quoteManagement->submit($quote));
+        $this->getSalesOrder()->setEmailSent(0);
+        $this->eventManagement->dispatch('sales_order_place_after', ['order' => $this->getSalesOrder()]);
 
         $this->addResponse(
             __(
                 'Order has been created. [Order: %1, Avocado Order: %2]',
-                $this->_getSalesOrder()->getIncrementId(),
-                $this->_getClientOrder()->getAvocadoOrderId()
+                $this->getSalesOrder()->getIncrementId(),
+                $this->getClientOrder()->getAvocadoOrderId()
             ),
             Status::SUCCESS
         );
@@ -627,23 +632,24 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
-    private function _createInvoice()
+    private function createInvoice()
     {
         if (!$this->_helper->getIsActiveCreateInvoice()
-            || !$this->_getSalesOrder()->canInvoice()
+            || null === $this->orderEntity
+            || !$this->getSalesOrder()->canInvoice()
         ) {
             $this->addResponse(
                 __(
                     'Cannot invoice. [Order: %1,  Client Order: %2]',
-                    $this->_getSalesOrder()->getIncrementId(),
-                    $this->_getClientOrder()->getAvocadoOrderId()
+                    $this->getSalesOrder()->getIncrementId(),
+                    $this->getClientOrder()->getAvocadoOrderId()
                 ),
                 Status::WARNING
             );
             return $this;
         }
 
-        $invoice = $this->_invoiceService->prepareInvoice($this->_getSalesOrder());
+        $invoice = $this->invoiceService->prepareInvoice($this->getSalesOrder());
         if (!$invoice || !$invoice->getTotalQty()) {
             throw new LocalizedException(__('Could not create invoice.'));
         }
@@ -651,14 +657,14 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
         $invoice->setRequestedCaptureCase(OrderInvoice::CAPTURE_OFFLINE);
         $invoice->setTransactionId(time())
             ->addComment(
-                __('Avocado Synchronisation. [Avocado Order: %1]', $this->_getClientOrder()->getAvocadoOrderId()),
+                __('Avocado Synchronisation. [Avocado Order: %1]', $this->getClientOrder()->getAvocadoOrderId()),
                 false
             )->setCustomerNoteNotify(false);
 
         $invoice->register();
         $invoice->getOrder()->setIsInProcess(true);
 
-        $this->_transactionFactory
+        $this->transactionFactory
             ->create()
             ->addObject($invoice)
             ->addObject($invoice->getOrder())
@@ -667,9 +673,9 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
         $this->addResponse(
             __(
                 'Invoice has been created. [Order: %1, Invoice: %2, Avocado Order: %3]',
-                $this->_getSalesOrder()->getIncrementId(),
+                $this->getSalesOrder()->getIncrementId(),
                 $invoice->getIncrementId(),
-                $this->_getClientOrder()->getAvocadoOrderId()
+                $this->getClientOrder()->getAvocadoOrderId()
             ),
             Status::SUCCESS
         );
@@ -681,21 +687,21 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @return OrderInterface|null
      * @throws LocalizedException
      */
-    private function _getClientOrder()
+    private function getClientOrder()
     {
-        if (null === $this->_clientOrderEntity) {
+        if (null === $this->clientOrderEntity) {
             throw new LocalizedException(__('Client order entity is not set.'));
         }
-        return $this->_clientOrderEntity;
+        return $this->clientOrderEntity;
     }
 
     /**
      * @param OrderInterface $order
      * @return $this
      */
-    private function _setClientOrder(OrderInterface $order)
+    private function setClientOrder(OrderInterface $order)
     {
-        $this->_clientOrderEntity = $order;
+        $this->clientOrderEntity = $order;
         return $this;
     }
 
@@ -703,21 +709,21 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @return SalesOrderInterface|null
      * @throws LocalizedException
      */
-    private function _getSalesOrder()
+    private function getSalesOrder()
     {
-        if (null === $this->_orderEntity) {
+        if (null === $this->orderEntity) {
             throw new LocalizedException(__('Order entity is not set.'));
         }
-        return $this->_orderEntity;
+        return $this->orderEntity;
     }
 
     /**
      * @param SalesOrderInterface $salesOrder
      * @return $this
      */
-    private function _setSalesOrder(SalesOrderInterface $salesOrder)
+    private function setSalesOrder(SalesOrderInterface $salesOrder)
     {
-        $this->_orderEntity = $salesOrder;
+        $this->orderEntity = $salesOrder;
         return $this;
     }
 
@@ -725,10 +731,10 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @return array
      * @throws LocalizedException
      */
-    private function _generateBillingAddress()
+    private function generateBillingAddress()
     {
-        $clientShippingEntry = $this->_getClientOrder()->getShippingEntry();
-        if (!$clientBillingEntry = $this->_getClientOrder()->getBillingEntry()) {
+        $clientShippingEntry = $this->getClientOrder()->getShippingEntry();
+        if (!$clientBillingEntry = $this->getClientOrder()->getBillingEntry()) {
             throw new LocalizedException(__('Could not retrieve client billing address.'));
         }
 
@@ -760,9 +766,11 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
             ];
         }
 
-        if (!isset($clientBillingEntry[ClientOrderMetadataInterface::BILL_CITY],
-                $clientBillingEntry[ClientOrderMetadataInterface::BILL_COUNTRY],
-                $clientBillingEntry[ClientOrderMetadataInterface::BILL_POSTCODE])
+        if (!isset(
+            $clientBillingEntry[ClientOrderMetadataInterface::BILL_CITY],
+            $clientBillingEntry[ClientOrderMetadataInterface::BILL_COUNTRY],
+            $clientBillingEntry[ClientOrderMetadataInterface::BILL_POSTCODE]
+        )
             || !$billingStreet = trim(implode("\n", $billingStreet ?: []))
         ) {
             throw new LocalizedException(__('Could not retrieve client billing address [street].'));
@@ -787,10 +795,10 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @return array
      * @throws LocalizedException
      */
-    private function _generateShippingAddress()
+    private function generateShippingAddress()
     {
-        $clientBillingEntry = $this->_getClientOrder()->getBillingEntry();
-        if (!$clientShippingEntry = $this->_getClientOrder()->getShippingEntry()) {
+        $clientBillingEntry = $this->getClientOrder()->getBillingEntry();
+        if (!$clientShippingEntry = $this->getClientOrder()->getShippingEntry()) {
             throw new LocalizedException(__('Could not retrieve client shipping address.'));
         }
 
@@ -822,9 +830,11 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
             ];
         }
 
-        if (!isset($clientShippingEntry[ClientOrderMetadataInterface::SHIP_CITY],
-                $clientShippingEntry[ClientOrderMetadataInterface::SHIP_COUNTRY],
-                $clientShippingEntry[ClientOrderMetadataInterface::SHIP_POSTCODE])
+        if (!isset(
+            $clientShippingEntry[ClientOrderMetadataInterface::SHIP_CITY],
+            $clientShippingEntry[ClientOrderMetadataInterface::SHIP_COUNTRY],
+            $clientShippingEntry[ClientOrderMetadataInterface::SHIP_POSTCODE]
+        )
             || !$shippingStreet = trim(implode("\n", $shippingStreet ?: []))
         ) {
             throw new LocalizedException(__('Could not retrieve client billing address [street].'));
@@ -849,8 +859,8 @@ class OrderCreateManagement extends AbstractManagement implements OrderCreateMan
      * @return bool
      * @throws LocalizedException
      */
-    private function _getIsAdmin()
+    private function getIsAdmin()
     {
-        return $this->_appState->getAreaCode() == Area::AREA_ADMINHTML;
+        return $this->appState->getAreaCode() == Area::AREA_ADMINHTML;
     }
 }

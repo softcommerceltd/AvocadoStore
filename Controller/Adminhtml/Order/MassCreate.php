@@ -27,12 +27,12 @@ class MassCreate extends AbstractMassAction implements HttpPostActionInterface
     /**
      * @var OrderCreateManagementInterface
      */
-    private OrderCreateManagementInterface $_orderCreateManagement;
+    private OrderCreateManagementInterface $orderCreateManagement;
 
     /**
      * @var SearchCriteriaBuilder
      */
-    private SearchCriteriaBuilder $_searchCriteriaBuilder;
+    private SearchCriteriaBuilder $searchCriteriaBuilder;
 
     /**
      * MassCreate constructor.
@@ -51,8 +51,8 @@ class MassCreate extends AbstractMassAction implements HttpPostActionInterface
         ResourceModel\Order\CollectionFactory $collectionFactory,
         Context $context
     ) {
-        $this->_orderCreateManagement = $orderCreateManagement;
-        $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->orderCreateManagement = $orderCreateManagement;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         parent::__construct($massActionFilter, $resource, $collectionFactory, $context);
     }
 
@@ -71,21 +71,21 @@ class MassCreate extends AbstractMassAction implements HttpPostActionInterface
             return $resultRedirect;
         }
 
-        $searchCriteria = $this->_searchCriteriaBuilder
+        $searchCriteria = $this->searchCriteriaBuilder
             ->addFilter(OrderInterface::ENTITY_ID, $ids, 'in')
             ->create();
 
-        $this->_orderCreateManagement
+        $this->orderCreateManagement
             ->setCanExecuteFlag(true)
             ->setSearchCriteriaRequest($searchCriteria);
 
         try {
-            $this->_orderCreateManagement->execute();
+            $this->orderCreateManagement->execute();
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         }
 
-        $this->buildMessageResponseHtml($this->_orderCreateManagement->getResponse());
+        $this->buildMessageResponseHtml($this->orderCreateManagement->getResponse());
 
         return $resultRedirect;
     }
@@ -103,7 +103,7 @@ class MassCreate extends AbstractMassAction implements HttpPostActionInterface
 
         foreach ($response as $status => $message) {
             if (is_array($message)) {
-                $this->_buildMessageResponseHtml($message);
+                $this->buildMessageResponseHtml($message);
                 continue;
             }
 

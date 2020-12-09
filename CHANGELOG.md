@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.0.6
+- **Fix**: Fix to massCreateOrder message generator.
+
 ### Version 1.0.5
 - **Fix**: Changes to UI listing actions.
 
